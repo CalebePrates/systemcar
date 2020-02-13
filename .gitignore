@@ -1,0 +1,10 @@
+
+suite/suite/__pycache__/
+
+*.pyc
+
+suite/systemcar/migrations/0002_auto_20200211_2051.py
+
+suite/systemcar/migrations/0003_auto_20200212_1918.py
+
+suite/systemcar/migrations/0001_initial.py

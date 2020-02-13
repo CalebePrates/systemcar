@@ -1,0 +1,228 @@
+{% extends 'blank.html' %}
+{% load static %}
+{% block css %}
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Tempusdominus Bbootstrap 4 -->
+<link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+<!-- iCheck -->
+<link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+<!-- JQVMap -->
+<link rel="stylesheet" href="{% static 'plugins/jqvmap/jqvmap.min.css' %}">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
+<!-- summernote -->
+<link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.css' %}">
+{% endblock %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <h1 class="m-0 text-dark">Dashboard</h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>Automóveis sem foto</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-images"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>53</h3>
+
+              <p>Contatos nos últimos 30 dias</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-id-card"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>Clientes sem CPF</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Leads nos últimos 30 dias</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+
+          <!-- jQuery Knob -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="far fa-chart-bar"></i>
+                Dados Gerais
+              </h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6 col-md-3 text-center">
+                  <input type="text" class="knob" value="30" data-width="90" data-height="90" data-fgColor="#3c8dbc">
+
+                  <div class="knob-label">Novos colaboradores</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-6 col-md-3 text-center">
+                  <input type="text" class="knob" value="70" data-width="90" data-height="90" data-fgColor="#f56954">
+
+                  <div class="knob-label">Novos clientes</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-6 col-md-3 text-center">
+                  <input type="text" class="knob" value="80" data-min="-150" data-max="150" data-width="90"
+                    data-height="90" data-fgColor="#00a65a">
+
+                  <div class="knob-label">Novos veículos</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-6 col-md-3 text-center">
+                  <input type="text" class="knob" value="40" data-width="90" data-height="90" data-fgColor="#00c0ef">
+
+                  <div class="knob-label">Novos Atendimentos</div>
+                </div>
+                <!-- ./col -->
+              </div>
+              <!-- /.row -->
+              <div class="row">
+                <div class="col-6 text-center">
+                  <input type="text" class="knob" value="90" data-width="90" data-height="90" data-fgColor="#932ab6">
+
+                  <div class="knob-label">Novos clientes sem telefone</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-6 text-center">
+                  <input type="text" class="knob" value="50" data-width="90" data-height="90" data-fgColor="#39CCCC">
+
+                  <div class="knob-label">Novos clientes sem email</div>
+                </div>
+                <!-- ./col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          <!-- BAR CHART -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Contatos e Leads por mês</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                    class="fas fa-times"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="barChart"
+                  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+          <!-- PIE CHART -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Tipos de automóveis</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                    class="fas fa-times"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <canvas id="pieChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock %}
+{% block scripts %}
+<!-- piechart -->
+<script src="{% static 'dist/js/charts.js' %}"></script>
+<!-- jQuery Knob -->
+<script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+{% endblock %}
