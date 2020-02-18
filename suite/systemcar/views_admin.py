@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+# Funções que montam o context e renderiza a página
 def dashboard(request):
     context = {'url': 'dashboard'}
     return render(request, 'dashboard.html', context)
@@ -59,3 +60,4 @@ def contatos_solicitados(request):
 def leads_solicitadas(request):
     context = {}
     return render(request, 'leads_solicitadas.html', context)
+# Funções que montam o context e renderiza a página / END
