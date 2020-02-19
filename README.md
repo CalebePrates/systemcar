@@ -1,19 +1,21 @@
+<h1>SystemCar</h1>
+
 Esse projeto tem como objetivo ser um sistema interno de um site de venda e aluguel de automóveis. Para acessar o sistema no website do cliente bastaria escrever "dominio"/admin.
 
-Etapas do desenvolvimento:
-1) Front-end (Em andamento);
-2) Modelagem e criação parcial dos "models" (Em andamento);
-3) Back-end;
-4) Testes para fechar uma versão 1.0.
+Etapas do desenvolvimento:</br>
+1) Front-end (Em andamento);</br>
+2) Modelagem e criação parcial dos "models" (Em andamento);</br>
+3) Back-end;</br>
+4) Testes para fechar uma versão 1.0.</br>
 
 Ferramentas a serem utilizadas:
--HTML;
--CSS;
--JavaScript (Jquery)
--Bootstrap 4
--Django + Python
--AdminLte 3
--Fontawesome
+-HTML;</br>
+-CSS;</br>
+-JavaScript (Jquery);</br>
+-Bootstrap 4;</br>
+-Django + Python;</br>
+-AdminLte 3;</br>
+-Fontawesome.</br>
 
 Obs: As ferramentas sitadas acima podem sofrer alterações, já que muitos plugins e outros instrumentos podem ser acrescentados no processo de desenvolvimento.
 
