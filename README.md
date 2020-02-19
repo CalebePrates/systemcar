@@ -9,13 +9,13 @@ Etapas do desenvolvimento:</br>
 4) Testes para fechar uma versão 1.0.</br>
 
 Ferramentas a serem utilizadas:
--HTML;</br>
--CSS;</br>
--JavaScript (Jquery);</br>
--Bootstrap 4;</br>
--Django + Python;</br>
--AdminLte 3;</br>
--Fontawesome.</br>
+1) HTML;
+2) CSS;
+3) JavaScript (Jquery);
+4) Bootstrap 4;
+5) Django + Python;
+6) AdminLte 3;
+7) Fontawesome.
 
 Obs: As ferramentas sitadas acima podem sofrer alterações, já que muitos plugins e outros instrumentos podem ser acrescentados no processo de desenvolvimento.
 
