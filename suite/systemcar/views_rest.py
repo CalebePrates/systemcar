@@ -22,4 +22,4 @@ class cadastrar_colaborador(APIView):
             raise exceptions.ParseError({'msg': 'Erro ao processar o request', 'ex': str(e)})
 
     def initial(self, request, *args, **kwargs):
-        super(editar_endereco, self).initial(request, *args, **kwargs)
+        super(cadastrar_colaborador, self).initial(request, *args, **kwargs)
