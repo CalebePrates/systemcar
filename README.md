@@ -20,4 +20,4 @@ Ferramentas a serem utilizadas:
 Obs: As ferramentas citadas acima podem sofrer algumas alterações, já que muitos plugins e outros instrumentos podem ser acrescentados no processo de desenvolvimento.
 
 ![Image description](https://github.com/CalebePrates/systemcar/blob/master/prints/primeiroPrint.PNG)
-Imagem 01 - Foto da página "Dashboard" do sistema com seu front-end pronto
+Imagem 01 - Foto da página "Dashboard" do sistema com seu front-end pronto.
