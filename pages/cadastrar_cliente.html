@@ -35,15 +35,17 @@
                         <div class="card-body row">
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="usuario">Nome</label>
-                                <input type="text" class="form-control" id="usuario" placeholder="Preencha com o nome">
+                                <input type="text" class="form-control" name="nome_cliente" placeholder="Preencha com o nome">
+                                <spna style="color: red; display: none;" id="spanNome_cliente">*Campo nome inválido</spna>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="usuario">Usuário</label>
-                                <input type="text" class="form-control" id="usuario" placeholder="Preencha com o usuário">
+                                <input type="text" class="form-control" name="usuario_cliente" placeholder="Preencha com o usuário">
+                                <spna style="color: red; display: none;" id="spanUsuario_cliente">*Campo usuário inválido</spna>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
                                 <label>Tipo de cliente</label>
-                                <select class="form-control">
+                                <select class="form-control" name="tipoCliente_cliente">
                                   <option>cliente 1</option>
                                   <option>cliente 2</option>
                                   <option>cliente 3</option>
@@ -53,11 +55,13 @@
                               </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="senha">Senha</label>
-                                <input type="password" class="form-control" id="senha" placeholder="Preencha com a senha">
+                                <input type="password" class="form-control" name="senha_cliente" placeholder="Preencha com a senha">
+                                <spna style="color: red; display: none;" id="spanSenha_cliente">*Campo senha inválido</spna>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="confirm_senha">Confirmar senha</label>
-                                <input type="password" class="form-control" id="confirm_senha" placeholder="Confirme a senha">
+                                <input type="password" class="form-control" name="confirm_cliente" placeholder="Confirme a senha">
+                                <spna style="color: red; display: none;" id="spanConfirm_cliente">*Campo confirmar senha inválido</spna>
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -73,11 +77,13 @@
                         <div class="card-body row">
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Preencha com o email">
+                                <input type="email" class="form-control" name="email_cliente" placeholder="Preencha com o email">
+                                <spna style="color: red; display: none;" id="spanEmail_cliente">*Campo email inválido</spna>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="usuario">CPF</label>
-                                <input type="text" class="form-control" id="usuario" placeholder="Preencha com o CPF">
+                                <input type="text" class="form-control" name="cpf_cliente" placeholder="Preencha com o CPF">
+                                <spna style="color: red; display: none;" id="spanCpf_cliente">*Campo CPF inválido</spna>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="foto_perfil">Foto de perfil</label>
@@ -109,5 +115,5 @@
 
 
 {% block scripts %}
-
+<script src="{% static 'dist/js/cadastrar_cliente.js' %}"></script>
 {% endblock %}
