@@ -11,15 +11,22 @@ function validaEmail(email) {
 
 function validarCamposCliente(){
     $('#spanNome').hide()
-    $('[name=nome]').css("border-color", "#ced4da");
+    $('[name=nome_cliente]').css("border-color", "#ced4da");
 
-    var nome = $('[name=nome]').val();
+    var nome = $('[name=nome_cliente]').val();
+    var usuario = $('[name=usuario_cliente]').val();
+    var tipoCliente = $('[name=tipoCliente_cliente]').val();
+    var senha = $('[name=senha_cliente]').val();
+    var confirmSenha = $('[name=confirm_cliente]').val();
+    var email = $('[name=email_cliente]').val();
+    var cpf = $('[name=cpf_cliente]').val();
+    var dataNascimento = $('[name=data_cliente]').val();
     
     var formValido = true;
 
     if (nome.length < 3 || nome == ""){
         formValido = false;
-        $('[name=nome]').css("border-color", "red");
+        $('[name=nome_cliente]').css("border-color", "red");
         $('#spanNome').show()
     }
 
