@@ -48,6 +48,6 @@ urlpatterns = [
     path('admin/leads_solicitadas/', views_admin.leads_solicitadas, name='leads_solicitadas'),
 
     # Funções REST
-    path('rest/cadastrar_colaborador_rest/', views_rest.cadastrar_colaborador.as_view(), name='cadastrar_colaborador_rest'),
+    path('rest/cadastrar_colaborador_rest/', views_rest.cadastrar_colaborador_rest.as_view(), name='cadastrar_colaborador_rest'),
     # Funções REST / END
 ]

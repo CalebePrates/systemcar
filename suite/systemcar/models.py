@@ -14,7 +14,7 @@ class TiposUsuarios(models.Model):
         return str(self.Nome)
 
 class UserManager(AbstractUser):
-    TiposUsuarios = models.IntegerField(choices=lista_opcoes.OPCOES_COLABORADOR)
+    TiposUsuarios = models.IntegerField(choices=lista_opcoes.OPCOES_COLABORADOR, null=True, blank=True)
     history = HistoricalRecords()
     tracker = FieldTracker()
 
@@ -74,12 +74,44 @@ class Colaborador(models.Model):
     Endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE, null=True, blank=True, db_index=True, related_name='Colaborador_Endereco')
     SituacaoNaEmpresa = models.IntegerField(choices=lista_opcoes.SITUACAO_NA_EMPRESA, null=True, blank=True)
     FotoPerfil = models.ImageField(upload_to='images', blank=True)
-    TipoUsuário = models.IntegerField(choices=lista_opcoes.OPCOES_COLABORADOR)
+    TipoUsuario = models.IntegerField(choices=lista_opcoes.OPCOES_COLABORADOR)
     history = HistoricalRecords()
     tracker = FieldTracker()
 
     def __str__(self):
         return self.Nome
+
+class Integrador(models.Model):
+    Nome = models.CharField(max_length=100)
+    Token = models.CharField(max_length=1000,null=True,blank=True)
+    ClienteId = models.CharField(max_length=500,null=True,blank=True)
+    url = models.CharField(max_length=50, null=True, blank=True, default=None)
+    ClientSecret = models.CharField(max_length=1000,null=True,blank=True) #Client Secret informado pela Olx
+    Observacoes = models.TextField(null=True, blank=True, default='') #Possível detalhe a mais do integrador
+    AccountId = models.CharField(max_length=50,null=True,blank=True)
+    Category = models.CharField(max_length=50,null=True,blank=True)
+    GroupId = models.CharField(max_length=150,null=True,blank=True)
+    Ativo = models.BooleanField(default=False)
+    Icon = models.ImageField(upload_to='media/integradores', null=True, blank=True)
+    def __str__(self):
+        return self.Nome
+
+    def save(self, *args, **kwargs):
+        if self.Token:
+            self.Ativo = True
+        else:
+            self.Ativo = False
+        super(Integrador, self).save(*args, **kwargs)
+
+    def get_page_name(self):
+        if self.Observacoes:
+            try:
+                name = json.loads(self.Observacoes).get('name')
+            except:
+                name = json.loads(self.Observacoes.replace("'",'"')).get('name')
+
+            return name
+        return ''
 
 class Configuracoes(models.Model):
     Nome = models.CharField(max_length=50)

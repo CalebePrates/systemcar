@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'systemcar',
     'rest_framework',
     'simple_history',
-    'model_utils'
+    'model_utils',
+    'corsheaders'
 ]
 
 AUTH_USER_MODEL = 'systemcar.UserManager'
@@ -53,7 +54,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL=True
 
 ROOT_URLCONF = 'suite.urls'
 

@@ -35,30 +35,40 @@
                         <div class="card-body row">
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="usuario">Nome</label>
-                                <input type="text" class="form-control" id="usuario" placeholder="Preencha com o nome">
+                                <input type="text" class="form-control" name="nome_colaborador" placeholder="Preencha com o nome">
+                                <span style="color: red; display: none;" id="spanNome_colaborador">*Campo nome inválido</span>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="usuario">Usuário</label>
-                                <input type="text" class="form-control" id="usuario" placeholder="Preencha com o usuário">
+                                <input type="text" class="form-control" name="usuario_colaborador" placeholder="Preencha com o usuário">
+                                <span style="color: red; display: none;" id="spanUsuario_colaborador">*Campo usuário inválido</span>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
                                 <label>Tipo de colaborador</label>
-                                <select class="form-control">
-                                  <option>colaborador 1</option>
-                                  <option>colaborador 2</option>
-                                  <option>colaborador 3</option>
-                                  <option>colaborador 4</option>
-                                  <option>colaborador 5</option>
+                                <select class="form-control" name="tipoColaborador_colaborador">
+                                    {% for tipoColaborador, tipoColaboradorId in tiposColaborador.items %}
+                                    <option value="{{tipoColaboradorId}}">{{tipoColaborador}}</option>
+                                    {% endfor %}
                                 </select>
                               </div>
-                            <div class="form-group col-md-6 col-sm-12">
+                            <div class="form-group col-md-4 col-sm-12">
                                 <label for="senha">Senha</label>
-                                <input type="password" class="form-control" id="senha" placeholder="Preencha com a senha">
+                                <input type="password" class="form-control" name="senha_colaborador" placeholder="Preencha com a senha">
+                                <span style="color: red; display: none;" id="spanSenha_colaborador">*Campo senha inválido</span>
                             </div>
-                            <div class="form-group col-md-6 col-sm-12">
+                            <div class="form-group col-md-4 col-sm-12">
                                 <label for="confirm_senha">Confirmar senha</label>
-                                <input type="password" class="form-control" id="confirm_senha" placeholder="Confirme a senha">
+                                <input type="password" class="form-control" name="confirm_colaborador" placeholder="Confirme a senha">
+                                <span style="color: red; display: none;" id="spanConfirm_colaborador">*Campo confirmar senha inválido</span>
                             </div>
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label>Situação na empresa</label>
+                                <select class="form-control" name="situacaoEmpresa_colaborador">
+                                    {% for situacaoEmpresaPerda, situacaoEmpresaId in situacaoEmpresa.items %}
+                                    <option value="{{situacaoEmpresaId}}">{{situacaoEmpresaPerda}}</option>
+                                    {% endfor %}
+                                </select>
+                              </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
@@ -73,20 +83,34 @@
                         <div class="card-body row">
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Preencha com o email">
+                                <input type="email" class="form-control" name="email_colaborador" placeholder="Preencha com o email">
+                                <span style="color: red; display: none;" id="spanEmail_colaborador">*Campo email inválido</span>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="usuario">CPF</label>
-                                <input type="text" class="form-control" id="usuario" placeholder="Preencha com o CPF">
+                                <input type="text" class="form-control" name="cpf_colaborador" placeholder="Preencha com o CPF">
+                                <span style="color: red; display: none;" id="spanCpf_colaborador">*Campo CPF inválido</span>
                             </div>
-                            <div class="form-group col-md-4 col-sm-12">
-                                <label for="foto_perfil">Foto de perfil</label>
+                            <div class="form-group col-md-2 col-sm-12">
+                                <label>Data de nascimento</label>
                                 <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="foto_perfil">
-                                        <label class="custom-file-label" for="foto_perfil">Selecione uma foto...</label>
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </div>
+                                    <input name="data_colaborador" type="text" class="form-control data_mask" maxlength="10" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}">
+                                    <span style="color: red; display: none;" id="spanData_colaborador">*Campo data inválido</span>
                                 </div>
+                            </div>
+                            <div class="form-group col-md-2 col-sm-12">
+                              <label>Telefone</label>
+            
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                </div>
+                                <input type="text" class="form-control telefone_mask">
+                              </div>
+                              <!-- /.input group -->
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -109,5 +133,15 @@
 
 
 {% block scripts %}
-
+<!-- jqueryMask -->
+<script src="{% static 'plugins/jqueryMask/jquery.mask.min.js' %}"></script>
+<!-- Responsável pela data funcionar -->
+<script src="{% static 'plugins/moment/moment.min.js' %}"></script>
+<script src="{% static 'plugins/inputmask/min/jquery.inputmask.bundle.min.js' %}"></script>
+<!-- Responsável pelo telefone funcionar -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+<!-- Arquivo geral de máscaras -->
+<script src="{% static 'dist/js/mascaras.js' %}"></script>
+<!-- Script da página -->
+<script src="{% static 'dist/js/cadastrar_colaborador.js' %}"></script>
 {% endblock %}

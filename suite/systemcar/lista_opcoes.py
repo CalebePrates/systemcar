@@ -13,7 +13,7 @@ OPCOES_PERMISSAO = (
 )
 
 SITUACAO_NA_EMPRESA = (
-    (1,'ATIVO'),
-    (2,'DESLIGADO'),
-    (3,'FÉRIAS'),
+    (1,'Ativo'),
+    (2,'Desligado'),
+    (3,'Férias'),
 )
