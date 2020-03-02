@@ -16,8 +16,6 @@ class cadastrar_colaborador_rest(APIView):
 
     def post(self, request, *args, **kwargs):
         try:
-            import pdb
-            pdb.set_trace()
             colaborador = None
             if request.POST.get('idColaborador'):
                 existColaborador = Colaborador.objects.filter(id=request.POST.get('idColaborador')).first()
