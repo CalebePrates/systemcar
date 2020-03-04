@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h1 class="m-0 text-dark">Listar colaboradorres</h1>
+                <h1 class="m-0 text-dark">Listar colaboradores</h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -32,42 +32,30 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
-        <table class="table table-hover text-nowrap">
-            <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Reason</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>John Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-success">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-            </tr>
-            <tr>
-                <td>Alexander Pierce</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-warning">Pending</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-            </tr>
-            <tr>
-                <td>Bob Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-primary">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-            </tr>
-            <tr>
-                <td>Mike Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-danger">Denied</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-            </tr>
-            </tbody>
-        </table>
+            {% if colaboradores %}
+            <table class="table table-hover text-nowrap">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Criado por</th>
+                    <th>Situação</th>
+                    <th>Editar</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for colaborador in colaboradores %}
+                    <tr>
+                        <td>{% firstof colaborador.Nome %}</td>
+                        <td>{% firstof colaborador.Telefone 'Não informado' %}</td>
+                        <td><span class="tag tag-success">{% firstof colaborador.CriadoPor %}</span></td>
+                        <td>{% firstof colaborador.get_SituacaoNaEmpresa_display %}</td>
+                        <td><a href="/admin/editar_colaborador/{{colaborador.id}}" class="btn btn-success">Detalhes</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
         </div>
         <!-- /.card-body -->
     </div>

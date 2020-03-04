@@ -68,8 +68,8 @@ class Endereco(models.Model):
 class Colaborador(models.Model):
     Usuario = models.ForeignKey(UserManager, on_delete=models.CASCADE, null=True, blank=True, related_name='Colaborador_UserManager', db_index=True)
     CriadoPor = models.ForeignKey(UserManager, on_delete=models.SET_NULL, null=True, blank=True, related_name='Colaborador_CriadoPor')
-    Nome = models.TextField(max_length=50, blank=True)
-    Email = models.TextField(max_length=50, blank=True)
+    Nome = models.CharField(max_length=50, blank=True)
+    Email = models.CharField(max_length=50, blank=True)
     Telefone = models.CharField(max_length=12, blank=True)
     Endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE, null=True, blank=True, db_index=True, related_name='Colaborador_Endereco')
     SituacaoNaEmpresa = models.IntegerField(choices=lista_opcoes.SITUACAO_NA_EMPRESA, null=True, blank=True)

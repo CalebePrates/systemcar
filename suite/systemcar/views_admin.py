@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .lista_opcoes import *
+from .models import *
+from django.shortcuts import get_object_or_404
 
 # Funções que montam o context e renderiza a página
 @login_required
@@ -19,9 +21,10 @@ def automoveis_destaque(request):
     return render(request, 'automoveis_destaque.html', context)
 
 @login_required
-def cadastrar_colaborador(request):
+def cadastrar_colaborador(request, pk=None):
     situacaoEmpresa = dict((v, k) for k, v in SITUACAO_NA_EMPRESA)
     tiposColaborador = dict((v, k) for k, v in OPCOES_COLABORADOR)
+
     context = {
         'situacaoEmpresa': situacaoEmpresa,
         'tiposColaborador': tiposColaborador
@@ -30,7 +33,11 @@ def cadastrar_colaborador(request):
 
 @login_required
 def listar_colaboradores(request):
-    context = {}
+    colaboradores = Colaborador.objects.all()
+
+    context = {
+        "colaboradores": colaboradores
+    }
     return render(request, 'listar_colaboradores.html', context)
 
 @login_required
@@ -83,6 +90,22 @@ def leads_solicitadas(request):
     context = {}
     return render(request, 'leads_solicitadas.html', context)
 # Funções que montam o context e renderiza a página / END
+
+# Funções de edição / BEGIN
+def editar_colaborador(request, pk=None):
+    situacaoEmpresa = dict((v, k) for k, v in SITUACAO_NA_EMPRESA)
+    tiposColaborador = dict((v, k) for k, v in OPCOES_COLABORADOR)
+    colaborador = None
+    if pk:
+        colaborador = get_object_or_404(Colaborador, pk=pk)
+    
+    context = {
+        'situacaoEmpresa': situacaoEmpresa,
+        'tiposColaborador': tiposColaborador,
+        'colaborador': colaborador
+    }
+    return render(request, 'cadastrar_colaborador.html', context)
+# Funções de edição / END
 
 @login_required
 def setEndereco(newEndereco, request, sufixo = ''):
