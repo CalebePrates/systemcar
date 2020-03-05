@@ -32,12 +32,21 @@ def cadastrar_colaborador(request, pk=None):
     return render(request, 'cadastrar_colaborador.html', context)
 
 @login_required
-def listar_colaboradores(request):
-    colaboradores = Colaborador.objects.all()
+def listar_colaboradores(request, status_cadastro):
+    """
+    Função que renderiza a listagem de colaboradores.
+    details:
+        -status_cadastro = 0 (sucesso no cadastro)
+        -status_cadastro = 1 (erro interno no cadastro de colaborador)
+    """
+    
+    colaboradores = Colaborador.objects.all().order_by('-id')
 
     context = {
-        "colaboradores": colaboradores
+        "colaboradores": colaboradores,
+        "status_cadastro": status_cadastro
     }
+    
     return render(request, 'listar_colaboradores.html', context)
 
 @login_required

@@ -246,7 +246,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'listar_colaboradores' %}"
+                  <a href="{% url 'listar_colaboradores' status_cadastro=0 %}"
                     class="nav-link {% if request.resolver_match.url_name == 'listar_colaboradores' %}active{% endif %}">
                     <i class="fas fa-list nav-icon"></i>
                     <p>Listar</p>

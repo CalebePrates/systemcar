@@ -74,7 +74,6 @@ function validarCamposcolaborador(){
             $('#spanConfirm_colaborador').show();
         }
     }
-
     if (formValido){
         jsonData = {
             "idColaborador": idColaborador,
@@ -84,19 +83,10 @@ function validarCamposcolaborador(){
             "situacaoColaborador": situacaoEmpresa,
             "senhaColaborador": senha,
             "emailColaborador": email,
-            "telefoneColaborador": telefone
+            "telefoneColaborador": telefone.replace('(','').replace(')','').replace('-', '').replace(' ', '')
         }
         cadastrarColaboradorRequest(jsonData);
     }
-}
-
-function limpaFormularioColaborador(){
-    $('[name=nome_colaborador]').val("");
-    $('[name=usuario_colaborador]').val("");
-    $('[name=senha_colaborador]').val("");
-    $('[name=confirm_colaborador]').val("");
-    $('[name=email_colaborador]').val("");
-    $('[name=telefone_colaborador]').val("");
 }
 
 function cadastrarColaboradorRequest(jsonData){
@@ -106,9 +96,8 @@ function cadastrarColaboradorRequest(jsonData){
         url: "/rest/cadastrar_colaborador_rest/",
         data: jsonData
     }).done(function(response) {
-        console.log(response);
-        limpaFormularioColaborador();
+        $(location).attr('pathname', '/admin/listar_colaboradores/0')
     }).fail(function(response) {
-        console.log(response);
+        $(location).attr('pathname', '/admin/listar_colaboradores/1')
     })
 }

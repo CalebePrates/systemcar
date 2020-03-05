@@ -47,7 +47,7 @@
                     {% for colaborador in colaboradores %}
                     <tr>
                         <td>{% firstof colaborador.Nome %}</td>
-                        <td>{% firstof colaborador.Telefone 'Não informado' %}</td>
+                        <td class="phone">{% firstof colaborador.Telefone 'Não informado' %}</td>
                         <td><span class="tag tag-success">{% firstof colaborador.CriadoPor %}</span></td>
                         <td>{% firstof colaborador.get_SituacaoNaEmpresa_display %}</td>
                         <td><a href="/admin/editar_colaborador/{{colaborador.id}}" class="btn btn-success">Detalhes</a></td>
@@ -64,5 +64,8 @@
 {% endblock %}
 
 {% block scripts %}
-
+<!-- jqueryMask -->
+<script src="{% static 'plugins/jqueryMask/jquery.mask.min.js' %}"></script>
+<!-- Arquivo geral de máscaras -->
+<script src="{% static 'dist/js/mascaras.js' %}"></script>
 {% endblock %}

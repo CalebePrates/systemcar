@@ -5,6 +5,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import exceptions
 from rest_framework.decorators import api_view, permission_classes
+from django.shortcuts import redirect
+from .views_admin import *
 
 @permission_classes((IsAuthenticated,))
 class cadastrar_colaborador_rest(APIView):
@@ -23,7 +25,7 @@ class cadastrar_colaborador_rest(APIView):
             if existColaborador:
                 colaborador = existColaborador
             else:
-                if request.POST.get('usuarioColaborador') and request.POST.get('senhaColaborador'):
+                if request.POST.get('usuarioColaborador') and request.POST.get('senhaColaborador') and len(request.POST.get('senhaColaborador')) < 3:
                     usuario = UserManager.objects.create_user(username=str(request.POST.get('usuarioColaborador')),password=str(request.POST.get('senhaColaborador')))
                     usuario.save()
                     colaborador = Colaborador()

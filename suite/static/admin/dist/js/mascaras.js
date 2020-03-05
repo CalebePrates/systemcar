@@ -42,4 +42,17 @@ function mascaras() {
             $(this).val( first + '-' + lastfour );
         }
     });
+
+    $('.phone').text(function(i, text) {
+        return text.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    });
+
+    $(".only_numbers").keypress(function (e) {
+        //if the letter is not digit then display error and don't type anything
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+           //display error message
+           $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                return false;
+       }
+    });
 };
