@@ -5,6 +5,8 @@ $(document).ready(function(){
 })
 
 function validarCamposcolaborador(){
+    $('.btn-salvar').prop('disabled', true);
+
     $('[name=nome_colaborador]').css("border-color", "#ced4da");
     $('#spanNome_colaborador').hide();
     $('[name=usuario_colaborador]').css("border-color", "#ced4da");
@@ -86,6 +88,8 @@ function validarCamposcolaborador(){
             "telefoneColaborador": telefone.replace('(','').replace(')','').replace('-', '').replace(' ', '')
         }
         cadastrarColaboradorRequest(jsonData);
+    } else{
+        $('.btn-salvar').prop('disabled', false);
     }
 }
 
@@ -96,8 +100,8 @@ function cadastrarColaboradorRequest(jsonData){
         url: "/rest/cadastrar_colaborador_rest/",
         data: jsonData
     }).done(function(response) {
-        $(location).attr('pathname', '/admin/listar_colaboradores/0')
-    }).fail(function(response) {
         $(location).attr('pathname', '/admin/listar_colaboradores/1')
+    }).fail(function(response) {
+        $(location).attr('pathname', '/admin/listar_colaboradores/2')
     })
 }
