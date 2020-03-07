@@ -32,7 +32,7 @@ def cadastrar_colaborador(request, pk=None):
     return render(request, 'cadastrar_colaborador.html', context)
 
 @login_required
-def listar_colaboradores(request, status_cadastro):
+def listar_colaboradores(request, status_cadastro=None):
     """
     Função que renderiza a listagem de colaboradores.
     details:

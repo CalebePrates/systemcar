@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/cadastrar_colaborador/', views_admin.cadastrar_colaborador, name='cadastrar_colaborador'),
     path('admin/editar_colaborador/<int:pk>', views_admin.editar_colaborador, name='editar_colaborador'),
     path('admin/listar_colaboradores/<int:status_cadastro>', views_admin.listar_colaboradores, name='listar_colaboradores'),
+    path('admin/listar_colaboradores/', views_admin.listar_colaboradores, name='listar_colaboradores'),
     # URLS DO MENU COLABORADOR / END
     
     # URLS DO MENU CLIENTE

@@ -57,6 +57,20 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <div class="div-card-resultado col-lg-6 offset-md-3">
+                <div class="div-icone">
+                    <div class="col-lg-12">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>
+                            Não encontramos!
+                        </h3>
+                        <p>
+                            Não existe nenhum colaborador no sistema ou com os filtros utilizados na página. Crie colaboradores ou tente com novos filtros.
+                        </p>
+                    </div>
+                </div>
+            </div>
             {% endif %}
         </div>
         <!-- /.card-body -->

@@ -1,7 +1,9 @@
 {% extends 'blank.html' %}
 {% load static %}
-{% block css %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'dist/css/listagens.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 {% endblock %}
 
 {% block content %}
@@ -76,5 +78,8 @@
 {% endblock %}
 
 {% block scripts %}
-
+<!-- Script do modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Listagens JS -->
+<script src="{% static 'dist/js/listagens.js' %}"></script>
 {% endblock %}

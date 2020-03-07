@@ -34,12 +34,12 @@ class cadastrar_colaborador_rest(APIView):
                 else:
                     return JsonResponse({'msg': 'Não existe um usuário com as informações passadas ou não foi passado o usuario e senha para a função.'}, status=400)
 
+            # Email e Telefone podem ser retirados das informações do colaborador caso necessário, por isso não existe tratativas
+            colaborador.Email = str(request.POST.get('emailColaborador'))
+            colaborador.Telefone = str(request.POST.get('telefoneColaborador'))
+
             if request.POST.get('nomeColaborador'):
                 colaborador.Nome = str(request.POST.get('nomeColaborador'))
-            if request.POST.get('emailColaborador'):
-                colaborador.Email = str(request.POST.get('emailColaborador'))
-            if request.POST.get('telefoneColaborador'):
-                colaborador.Telefone = str(request.POST.get('telefoneColaborador'))
             if request.POST.get('situacaoColaborador'):
                 colaborador.SituacaoNaEmpresa = int(request.POST.get('situacaoColaborador'))
             if request.POST.get('tipoColaborador'):

@@ -2,6 +2,7 @@ $(document).ready(function(){
   var valor_retorno = $('[name=valor_retorno_cadastro]').val()
 
   if (valor_retorno == 1){ // Sucesso no cadastro
+    history.replaceState({}, null, "/admin/listar_colaboradores/") //remove o numero da URL
     $.confirm({
       theme: 'modern',
       title: 'Sucesso!',
@@ -13,6 +14,7 @@ $(document).ready(function(){
     });
   } 
   else if (valor_retorno == 2){ // Erro no cadastro
+    history.replaceState({}, null, "/admin/listar_colaboradores/") //remove o numero da URL
     $.confirm({
       theme: 'modern',
       title: 'Erro!',
