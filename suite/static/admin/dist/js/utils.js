@@ -22,7 +22,7 @@ function validaEmail(email) {
 
 function validarCPF(cpf) {	
 	cpf = cpf.replace(/[^\d]+/g,'');	
-	if(cpf == ''){
+	if(cpf == '' || cpf == undefined || cpf == null){
         return true;
     }
 	// Elimina CPFs invalidos conhecidos	

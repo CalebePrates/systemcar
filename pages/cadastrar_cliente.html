@@ -32,36 +32,22 @@
                 <div class="active tab-pane" id="principal">
                     <!-- form start -->
                     <form role="form">
+                        {% if cliente.id %}
+                            <input type="text" value="{{cliente.id}}" name="idCliente" style="display: none;">
+                        {% endif %}
                         <div class="card-body row">
                             <div class="form-group col-md-4 col-sm-12">
-                                <label for="usuario">Nome</label>
-                                <input type="text" class="form-control" name="nome_cliente" placeholder="Preencha com o nome">
+                                <label for="nome">Nome</label>
+                                <input id="nome" type="text" class="form-control" name="nome_cliente" placeholder="Preencha com o nome" value="{% firstof cliente.Nome '' %}">
                                 <span style="color: red; display: none;" id="spanNome_cliente">*Campo nome inválido</span>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
-                                <label for="usuario">Usuário</label>
-                                <input type="text" class="form-control" name="usuario_cliente" placeholder="Preencha com o usuário">
-                                <span style="color: red; display: none;" id="spanUsuario_cliente">*Campo usuário inválido</span>
-                            </div>
-                            <div class="form-group col-md-4 col-sm-12">
-                                <label>Tipo de cliente</label>
-                                <select class="form-control" name="tipoCliente_cliente">
-                                  <option>cliente 1</option>
-                                  <option>cliente 2</option>
-                                  <option>cliente 3</option>
-                                  <option>cliente 4</option>
-                                  <option>cliente 5</option>
+                                <label for="tipoCliente">Tipo de captação</label>
+                                <select id="tipoCliente" class="form-control" name="tipoCliente_cliente">
+                                    {% for tipoCliente, tipoClienteId in tiposCliente.items %}
+                                    <option {% if cliente.TipoCliente == tipoClienteId %} selected {% endif %} value="{{tipoClienteId}}">{{tipoCliente}}</option>
+                                    {% endfor %}
                                 </select>
-                              </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="senha">Senha</label>
-                                <input type="password" class="form-control" name="senha_cliente" placeholder="Preencha com a senha">
-                                <span style="color: red; display: none;" id="spanSenha_cliente">*Campo senha inválido</span>
-                            </div>
-                            <div class="form-group col-md-6 col-sm-12">
-                                <label for="confirm_senha">Confirmar senha</label>
-                                <input type="password" class="form-control" name="confirm_cliente" placeholder="Confirme a senha">
-                                <span style="color: red; display: none;" id="spanConfirm_cliente">*Campo confirmar senha inválido</span>
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -77,33 +63,36 @@
                         <div class="card-body row">
                             <div class="form-group col-md-4 col-sm-12">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email_cliente" placeholder="Preencha com o email">
+                                <input id="email" type="email" class="form-control" name="email_cliente" placeholder="Preencha com o email" value="{% firstof cliente.Email '' %}">
                                 <span style="color: red; display: none;" id="spanEmail_cliente">*Campo email inválido</span>
                             </div>
                             <div class="form-group col-md-4 col-sm-12">
-                                <label for="usuario">CPF</label>
-                                <input type="text" class="form-control" name="cpf_cliente" placeholder="Preencha com o CPF">
+                                <label for="cpf">CPF</label>
+                                <input id="cpf" type="text" class="form-control cpf_mask" name="cpf_cliente" placeholder="Preencha com o CPF" value="{% firstof cliente.Cpf '' %}" maxlength="14">
                                 <span style="color: red; display: none;" id="spanCpf_cliente">*Campo CPF inválido</span>
                             </div>
                             <div class="form-group col-md-2 col-sm-12">
-                                <label>Data de nascimento</label>
+                                <label for="telefone">Telefone</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                     </div>
-                                    <input name="data_cliente" type="text" class="form-control data_mask" maxlength="10" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}">
+                                    <input id="telefone" type="text" class="form-control telefone_mask" name="telefone_cliente" value="{% firstof cliente.Telefone '' %}">
+                                    <span style="color: red; display: none;" id="spanTelefone_cliente">*Campo telefone inválido</span>
                                 </div>
+                                <!-- /.input group -->
                             </div>
                             <div class="form-group col-md-2 col-sm-12">
-                              <label>Telefone</label>
-            
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                <label for="dataNascimento">Data de nascimento:</label>
+              
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                  </div>
+                                  <input id="dataNascimento" name="data_cliente" type="text" class="form-control data_mask" maxlength="10" value="{% firstof dataNascimentoString '' %}">
+                                  <span style="color: red; display: none;" id="spanData_cliente">*Campo data nascimento inválido</span>
                                 </div>
-                                <input type="text" class="form-control telefone_mask">
-                              </div>
-                              <!-- /.input group -->
+                                <!-- /.input group -->
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -135,6 +124,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
 <!-- Arquivo geral de máscaras -->
 <script src="{% static 'dist/js/mascaras.js' %}"></script>
+<!-- Arquivo de funções de utilidades -->
+<script src="{% static 'dist/js/utils.js' %}"></script>
 <!-- Script da página -->
 <script src="{% static 'dist/js/cadastrar_cliente.js' %}"></script>
 {% endblock %}

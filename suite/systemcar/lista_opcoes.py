@@ -5,6 +5,13 @@ OPCOES_COLABORADOR = (
     (4, 'Vendedor'),
 )
 
+OPCOES_CLIENTE = (
+    (1, 'Lead pelo site'),
+    (2, 'Lead por anúncio'),
+    (3, 'Contato'),
+    (4, 'Outro'),
+)
+
 OPCOES_PERMISSAO = (
     (1, 'Avançado'),
     (2, ''),

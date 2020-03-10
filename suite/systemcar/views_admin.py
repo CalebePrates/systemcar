@@ -39,7 +39,6 @@ def listar_colaboradores(request, status_cadastro=None):
         -status_cadastro = 0 (sucesso no cadastro)
         -status_cadastro = 1 (erro interno no cadastro de colaborador)
     """
-    
     colaboradores = Colaborador.objects.all().order_by('-id')
 
     context = {
@@ -51,12 +50,27 @@ def listar_colaboradores(request, status_cadastro=None):
 
 @login_required
 def cadastrar_cliente(request):
-    context = {}
+    tiposCliente = dict((v, k) for k, v in OPCOES_CLIENTE)
+
+    context = {
+        'tiposCliente': tiposCliente
+    }
     return render(request, 'cadastrar_cliente.html', context)
 
 @login_required
-def listar_clientes(request):
-    context = {}
+def listar_clientes(request, status_cadastro=None):
+    """
+    Função que renderiza a listagem de clientes.
+    details:
+        -status_cadastro = 0 (sucesso no cadastro)
+        -status_cadastro = 1 (erro interno no cadastro de cliente)
+    """
+    clientes = Cliente.objects.all().order_by('-id')
+
+    context = {
+        "clientes": clientes,
+        "status_cadastro": status_cadastro
+    }
     return render(request, 'listar_clientes.html', context)
 
 @login_required
@@ -114,6 +128,32 @@ def editar_colaborador(request, pk=None):
         'colaborador': colaborador
     }
     return render(request, 'cadastrar_colaborador.html', context)
+
+def editar_cliente(request, pk=None):
+    situacaoEmpresa = dict((v, k) for k, v in SITUACAO_NA_EMPRESA)
+    tiposCliente = dict((v, k) for k, v in OPCOES_CLIENTE)
+    cliente = None
+    if pk:
+        cliente = get_object_or_404(Cliente, pk=pk)
+
+    if cliente.DataNascimento:
+        if cliente.DataNascimento.day < 10:
+            diaNascimento = '0' + str(cliente.DataNascimento.day)
+        else:
+            diaNascimento = str(cliente.DataNascimento.day)
+        if cliente.DataNascimento.month < 10:
+            mesNascimento = '0' + str(cliente.DataNascimento.month)
+        else:
+            mesNascimento = str(cliente.DataNascimento.month)
+        dataNascimentoString = diaNascimento + '/' + mesNascimento + '/' + str(cliente.DataNascimento.year)
+    
+    context = {
+        'situacaoEmpresa': situacaoEmpresa,
+        'tiposCliente': tiposCliente,
+        'cliente': cliente,
+        'dataNascimentoString': dataNascimentoString
+    }
+    return render(request, 'cadastrar_cliente.html', context)
 # Funções de edição / END
 
 @login_required

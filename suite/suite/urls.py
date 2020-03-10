@@ -28,6 +28,8 @@ urlpatterns = [
     
     # URLS DO MENU CLIENTE
     path('admin/cadastrar_cliente/', views_admin.cadastrar_cliente, name='cadastrar_cliente'),
+    path('admin/editar_cliente/<int:pk>', views_admin.editar_cliente, name='editar_cliente'),
+    path('admin/listar_clientes/<int:status_cadastro>', views_admin.listar_clientes, name='listar_clientes'),
     path('admin/listar_clientes/', views_admin.listar_clientes, name='listar_clientes'),
     # URLS DO MENU CLIENTE / END
 
@@ -51,5 +53,6 @@ urlpatterns = [
 
     # Funções REST
     path('rest/cadastrar_colaborador_rest/', views_rest.cadastrar_colaborador_rest.as_view(), name='cadastrar_colaborador_rest'),
+    path('rest/cadastrar_cliente_rest/', views_rest.cadastrar_cliente_rest.as_view(), name='cadastrar_cliente_rest'),
     # Funções REST / END
 ]

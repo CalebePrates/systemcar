@@ -21,6 +21,8 @@ function mascaras() {
         }
     });
 
+    $('.cpf_mask').mask('999.999.999-99');
+
     $('.money_mask').mask("#,##0.00", {reverse: true}); // mascara para dinheiro
 
     $('.cep_mask').mask('99999-999'); // mascara para CEP

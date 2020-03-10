@@ -81,6 +81,21 @@ class Colaborador(models.Model):
     def __str__(self):
         return self.Nome
 
+class Cliente(models.Model):
+    Nome = models.CharField(max_length=50)
+    CriadoPor = models.ForeignKey(UserManager, on_delete=models.SET_NULL, null=True, blank=True, related_name='Cliente_CriadoPor')
+    Email = models.CharField(max_length=50, blank=True)
+    Telefone = models.CharField(max_length=12, blank=True)
+    Cpf = models.CharField(max_length=11, blank=True)
+    DataNascimento = models.DateField(auto_now=False, null=True, blank=True)
+    Endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE, null=True, blank=True, db_index=True, related_name='Cliente_Endereco')
+    TipoCliente = models.IntegerField(choices=lista_opcoes.OPCOES_CLIENTE)
+    history = HistoricalRecords()
+    tracker = FieldTracker()
+    
+    def __str__(self):
+        return self.Nome
+
 class Integrador(models.Model):
     Nome = models.CharField(max_length=100)
     Token = models.CharField(max_length=1000,null=True,blank=True)
@@ -129,15 +144,6 @@ class Automovel(models.Model):
     DataModificacao = models.DateTimeField()
     DataCriacao = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return self.Nome
-
-class Cliente(models.Model):
-    Nome = models.CharField(max_length=200)
-    Usuario = models.CharField(max_length=200)
-    Email = models.CharField(max_length=200)
-    Senha = models.CharField(max_length=200)
-    
     def __str__(self):
         return self.Nome
 

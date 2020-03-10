@@ -7,6 +7,7 @@ from rest_framework import exceptions
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import redirect
 from .views_admin import *
+from datetime import datetime
 
 @permission_classes((IsAuthenticated,))
 class cadastrar_colaborador_rest(APIView):
@@ -25,7 +26,7 @@ class cadastrar_colaborador_rest(APIView):
             if existColaborador:
                 colaborador = existColaborador
             else:
-                if request.POST.get('usuarioColaborador') and request.POST.get('senhaColaborador') and len(request.POST.get('senhaColaborador')) < 3:
+                if request.POST.get('usuarioColaborador') and request.POST.get('senhaColaborador') and len(request.POST.get('senhaColaborador')) > 3:
                     usuario = UserManager.objects.create_user(username=str(request.POST.get('usuarioColaborador')),password=str(request.POST.get('senhaColaborador')))
                     usuario.save()
                     colaborador = Colaborador()
@@ -60,3 +61,52 @@ class cadastrar_colaborador_rest(APIView):
 
     def initial(self, request, *args, **kwargs):
         super(cadastrar_colaborador_rest, self).initial(request, *args, **kwargs)
+
+@permission_classes((IsAuthenticated,))
+class cadastrar_cliente_rest(APIView):
+    """
+    Função responsável por cadastrar um cliente no sistema
+    """
+    def get(self, request):
+        raise exceptions.MethodNotAllowed()
+
+    def post(self, request, *args, **kwargs):
+        try:
+            cliente = None
+            existCliente = None
+            if request.POST.get('idCliente'):
+                existCliente = Cliente.objects.filter(id=request.POST.get('idCliente')).first()
+            if existCliente:
+                cliente = existCliente
+            else:
+                cliente = Cliente()
+                cliente.CriadoPor = request.user
+
+            # Email e Telefone podem ser retirados das informações do cliente caso necessário, por isso não existe tratativas
+            cliente.Email = str(request.POST.get('emailCliente'))
+            cliente.Telefone = str(request.POST.get('telefoneCliente'))
+
+            if request.POST.get('nomeCliente'):
+                cliente.Nome = str(request.POST.get('nomeCliente'))
+            if request.POST.get('cpfCliente'):
+                cliente.Cpf = str(request.POST.get('cpfCliente'))
+            if request.POST.get('dataNascimentoCliente'):
+                cliente.DataNascimento = datetime.strptime(request.POST.get('dataNascimentoCliente'), '%d/%m/%Y')
+            if request.POST.get('tipoCliente'):
+                cliente.TipoCliente = str(request.POST.get('tipoCliente'))
+            if request.POST.get('enderecoCliente'):
+                if cliente.Endereco:
+                    cliente.Endereco = setEndereco(cliente.Endereco, request, 'Cliente')
+                else:
+                    newEndereco = Endereco()
+                    cliente.Endereco = setEndereco(newEndereco, request, 'Cliente')
+
+            cliente.save()
+
+            return JsonResponse({'msg': 'Cliente cadastrado com sucesso!'}, status=200)
+
+        except Exception as e:
+            raise exceptions.ParseError({'msg': 'Erro ao processar o request', 'ex': str(e)})
+
+    def initial(self, request, *args, **kwargs):
+        super(cadastrar_cliente_rest, self).initial(request, *args, **kwargs)
