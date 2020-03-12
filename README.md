@@ -1,9 +1,9 @@
 <h1>SystemCar</h1>
 
-  Esse projeto tem como objetivo ser um sistema interno de um site de venda e aluguel de automóveis. O produto vai funcionar como um sistema interno do site, sendo possível acessa-lo apenas colocando "/admin" após o domínio do cliente, como por exemplo "www.exemplo.com/admin".
-  O Systemcar vai ser o responsável por capturar, cadastrar e mostrar todas informações para o funcionamento do site. Caso algum cliente da empresa se interesse por algum automóvel, preenchendo algum formulário, esses dados serão capturados, enviados para o email da empresa e apresentado no site, facilitando para a empresa o processo de captação de Leads e contatos.
-  Ao cadastrar um automóvel no sistema, ele automaticamente será apresentando e disponibilizado no site da empresa.
-  Os contatos e leads captados pelo site possibilitam para a empresa um novo cliente no sistema, sendo possível iniciar um processo de atendimento e para que o cliente efetue realmente a compra do produto.
+  <p>Esse projeto tem como objetivo ser um sistema interno de um site de venda e aluguel de automóveis. O produto vai funcionar como um sistema interno do site, sendo possível acessa-lo apenas colocando "/admin" após o domínio do cliente, como por exemplo "www.exemplo.com/admin".</p>
+  <p>O Systemcar vai ser o responsável por capturar, cadastrar e mostrar todas informações para o funcionamento do site. Caso algum cliente da empresa se interesse por algum automóvel, preenchendo algum formulário, esses dados serão capturados, enviados para o email da empresa e apresentado no site, facilitando para a empresa o processo de captação de Leads e contatos.</p>
+  <p>Ao cadastrar um automóvel no sistema, ele automaticamente será apresentando e disponibilizado no site da empresa.</p>
+  <p>Os contatos e leads captados pelo site possibilitam para a empresa um novo cliente no sistema, sendo possível iniciar um processo de atendimento e para que o cliente efetue realmente a compra do produto.</p>
 
 Etapas do desenvolvimento:</br>
 1) Cadastrar, editar e listar - Colaborador (Concluído);</br>
