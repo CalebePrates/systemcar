@@ -138,9 +138,32 @@ class Configuracoes(models.Model):
         return self.Nome
 
 class Automovel(models.Model):
-    Nome = models.CharField(max_length=200)
-    Marca = models.CharField(max_length=200)
-    Modelo = models.CharField(max_length=200)
+    Titulo = models.CharField(max_length=100)
+    Descricao = models.TextField(null=True, blank=True)
+    Placa = models.CharField(max_length=8)
+    Marca = models.CharField(max_length=40)
+    Modelo = models.CharField(max_length=40)
+    Versao = models.CharField(max_length=40)
+    AnoModelo = models.IntegerField(null=True, blank=True)
+    Cambio = models.IntegerField(choices=lista_opcoes.OPCOES_CAMBIO)
+    Combustivel = models.IntegerField(choices=lista_opcoes.OPCOES_COMBUSTIVEL)
+    Direcao = models.IntegerField(choices=lista_opcoes.OPCOES_DIRECAO)
+    PotenciaMotor = models.IntegerField(choices=lista_opcoes.OPCOES_POTENCIA)
+    TipoVeiculo = models.IntegerField(choices=lista_opcoes.OPCOES_TIPO_VEICULO)
+    Quilometragem = models.FloatField(null=True, blank=True)
+    Portas = models.IntegerField(choices=lista_opcoes.OPCOES_PORTAS)
+    FinalPlaca = models.IntegerField(choices=lista_opcoes.OPCOES_FINAL_PLACA)
+    Opcionais = models.IntegerField(choices=lista_opcoes.OPCOES_OPCIONAIS)
+    Cor = models.IntegerField(choices=lista_opcoes.OPCOES_COR)
+    AceitaTrocas = models.IntegerField(choices=lista_opcoes.OPCOES_ACEITA_TROCA)
+    EstadoFinanceiro = models.IntegerField(choices=lista_opcoes.OPCOES_ESTADO_FINANCEIRO)
+    UnicoDono = models.IntegerField(choices=lista_opcoes.OPCOES_UNICO_DONO)
+    Preco = models.DecimalField(max_digits=11, decimal_places=7, null=True, blank=True, db_index=True)
+    Foto = models.ImageField(upload_to='images', blank=True)
+
+    TipoMoto = models.IntegerField(choices=lista_opcoes.OPCOES_TIPO_MOTO)
+    Cilindradas = models.IntegerField(choices=lista_opcoes.OPCOES_CILINDRADAS)
+
     DataModificacao = models.DateTimeField()
     DataCriacao = models.DateTimeField(default=timezone.now)
 

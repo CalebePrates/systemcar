@@ -143,3 +143,6 @@ MEDIA_ROOT = ''
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join('')
+
+EMAIL_EMAIL_CLIENTE = 'eltoncalebeprates@gmail.com'
+PASSWORD_EMAIL_CLIENTE = 'calebe123321'

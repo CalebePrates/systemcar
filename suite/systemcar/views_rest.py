@@ -8,6 +8,11 @@ from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import redirect
 from .views_admin import *
 from datetime import datetime
+from django.conf import settings
+# import necessary packages
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
 
 @permission_classes((IsAuthenticated,))
 class cadastrar_colaborador_rest(APIView):
@@ -53,6 +58,30 @@ class cadastrar_colaborador_rest(APIView):
                     colaborador.Endereco = setEndereco(newEndereco, request, 'Colaborador')
 
             colaborador.save()
+
+            if colaborador.Email and not existColaborador:
+                msg = MIMEMultipart()
+
+                # setup the parameters of the message
+                msg['From'] = settings.EMAIL_EMAIL_CLIENTE
+                msg['To'] = colaborador.Email
+                msg['Subject'] = "Bem-vindo! Aqui estão seus dados"
+
+                mensagem = "Nome:" + str(colaborador.Nome) + "\nUsuário:" + str(request.POST.get('usuarioColaborador')) + "\nSenha:" + str(request.POST.get('senhaColaborador'))
+                # create server
+                msg.attach(MIMEText(mensagem, 'plain'))
+                server = smtplib.SMTP('smtp.gmail.com: 587')
+                
+                server.starttls()
+                
+                # Login Credentials for sending the mail
+                server.login(settings.EMAIL_EMAIL_CLIENTE, settings.PASSWORD_EMAIL_CLIENTE)
+                
+                
+                # send the message via the server.
+                server.sendmail(settings.EMAIL_EMAIL_CLIENTE, colaborador.Email, msg.as_string())
+                
+                server.quit()
 
             return JsonResponse({'msg': 'Colaborador cadastrado com sucesso!'}, status=200)
 
@@ -102,6 +131,30 @@ class cadastrar_cliente_rest(APIView):
                     cliente.Endereco = setEndereco(newEndereco, request, 'Cliente')
 
             cliente.save()
+
+            if cliente.Email and not existCliente:
+                msg = MIMEMultipart()
+
+                # setup the parameters of the message
+                msg['From'] = settings.EMAIL_EMAIL_CLIENTE
+                msg['To'] = cliente.Email
+                msg['Subject'] = "Você agora é um de nossos clientes"
+
+                mensagem = "Nossos vendedores vão te atender o mais rápido possível. Nossa missão é realizar o seu sonho do automóvel próprio."
+                # create server
+                msg.attach(MIMEText(mensagem, 'plain'))
+                server = smtplib.SMTP('smtp.gmail.com: 587')
+                
+                server.starttls()
+                
+                # Login Credentials for sending the mail
+                server.login(settings.EMAIL_EMAIL_CLIENTE, settings.PASSWORD_EMAIL_CLIENTE)
+                
+                
+                # send the message via the server.
+                server.sendmail(settings.EMAIL_EMAIL_CLIENTE, cliente.Email, msg.as_string())
+                
+                server.quit()
 
             return JsonResponse({'msg': 'Cliente cadastrado com sucesso!'}, status=200)
 

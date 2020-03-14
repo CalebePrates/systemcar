@@ -147,11 +147,16 @@ def editar_cliente(request, pk=None):
             mesNascimento = str(cliente.DataNascimento.month)
         dataNascimentoString = diaNascimento + '/' + mesNascimento + '/' + str(cliente.DataNascimento.year)
     
+        context = {
+            'situacaoEmpresa': situacaoEmpresa,
+            'tiposCliente': tiposCliente,
+            'cliente': cliente,
+            'dataNascimentoString': dataNascimentoString
+        }
     context = {
         'situacaoEmpresa': situacaoEmpresa,
         'tiposCliente': tiposCliente,
-        'cliente': cliente,
-        'dataNascimentoString': dataNascimentoString
+        'cliente': cliente
     }
     return render(request, 'cadastrar_cliente.html', context)
 # Funções de edição / END
