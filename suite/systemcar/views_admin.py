@@ -6,6 +6,19 @@ from django.shortcuts import get_object_or_404
 
 # Funções que montam o context e renderiza a página
 @login_required
+def meu_perfil(request):
+    situacaoEmpresa = dict((v, k) for k, v in SITUACAO_NA_EMPRESA)
+    tiposColaborador = dict((v, k) for k, v in OPCOES_COLABORADOR)
+
+    colaborador = Colaborador.objects.filter(Usuario=request.user).first()
+    context = {
+        'colaborador': colaborador,
+        'situacaoEmpresa': situacaoEmpresa,
+        'tiposColaborador': tiposColaborador
+    }
+    return render(request, 'meu_perfil.html', context)
+
+@login_required
 def dashboard(request):
     context = {'url': 'dashboard'}
     return render(request, 'dashboard.html', context)

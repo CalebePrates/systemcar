@@ -1,0 +1,173 @@
+{% extends 'blank.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'dist/css/meu_perfil.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+{% endblock %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 class="m-0 text-dark">Meu perfil</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <img class="profile-user-img img-fluid img-circle" src="/static/admin/dist/img/user1-128x128.jpg" alt="User profile picture">
+            </div>
+
+            <h3 class="profile-username text-center">{{colaborador.Nome}}</h3>
+
+            <a href="#" class="btn btn-primary btn-block"><b>Sair da conta</b></a>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+        {% if colaborador.Email or colaborador.Telefone or colaborador.Endereco %}
+        <!-- About Me Box -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Informações adicionais</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            {% if colaborador.Telefone or colaborador.Email %}
+                <strong><i class="fas fa-book mr-1"></i>Contato</strong>
+                <p class="text-muted">{% firstof colaborador.Telefone 'Telefone não informado' %}</p>
+                <p class="text-muted">{% firstof colaborador.Email 'Email não informado' %}</p>
+            {% endif %}
+            <hr>
+            {% if colaborador.Endereco %}
+                <strong><i class="fas fa-map-marker-alt mr-1"></i>Localização</strong>
+                <p class="text-muted">{{colaborador.Endereco.Bairro.Cidade}}, {{colaborador.Endereco.Bairro.Cidade.Estado.Sigla}}</p>
+            {% endif %}
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        {% endif %}
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9">
+          <div class="card">
+              <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                      <li class="nav-item"><a class="nav-link active" href="#principal" data-toggle="tab">Obrigatórios</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#complemento" data-toggle="tab">Complementares</a></li>
+                  </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <!-- tab-content -->
+                <div class="tab-content">
+                    <div class="active tab-pane" id="principal">
+                        <!-- form start -->
+                        <form role="form">
+                            {% if colaborador.id %}
+                                <input type="text" value="{{colaborador.id}}" name="idColaborador" style="display: none;">
+                            {% endif %}
+                            <div class="card-body row">
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="usuario">Nome</label>
+                                    <input type="text" class="form-control" name="nome_colaborador" placeholder="Preencha com o nome" value="{% firstof colaborador.Nome '' %}">
+                                    <span style="color: red; display: none;" id="spanNome_colaborador">*Campo nome inválido</span>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="usuario">Usuário</label>
+                                    <input type="text" class="form-control" name="usuario_colaborador" placeholder="Preencha com o usuário" value="{% firstof colaborador.Usuario.username '' %}">
+                                    <span style="color: red; display: none;" id="spanUsuario_colaborador">*Campo usuário inválido</span>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label>Tipo de colaborador</label>
+                                    <select class="form-control" name="tipoColaborador_colaborador">
+                                        {% for tipoColaborador, tipoColaboradorId in tiposColaborador.items %}
+                                        <option {% if colaborador.TipoUsuario == tipoColaboradorId %} selected {% endif %} value="{{tipoColaboradorId}}">{{tipoColaborador}}</option>
+                                        {% endfor %}
+                                    </select>
+                                  </div>
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="senha">Senha</label>
+                                    <input type="password" class="form-control" name="senha_colaborador" placeholder="Preencha com a senha">
+                                    <span style="color: red; display: none;" id="spanSenha_colaborador">*Campo senha inválido</span>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="confirm_senha">Confirmar senha</label>
+                                    <input type="password" class="form-control" name="confirm_colaborador" placeholder="Confirme a senha">
+                                    <span style="color: red; display: none;" id="spanConfirm_colaborador">*Campo confirmar senha inválido</span>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label>Situação na empresa</label>
+                                    <select class="form-control" name="situacaoEmpresa_colaborador">
+                                        {% for situacaoEmpresaPerda, situacaoEmpresaId in situacaoEmpresa.items %}
+                                        <option {% if colaborador.SituacaoNaEmpresa == situacaoEmpresaId %} selected {% endif %} value="{{situacaoEmpresaId}}">{{situacaoEmpresaPerda}}</option>
+                                        {% endfor %}
+                                    </select>
+                                  </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-success btn-salvar">Salvar alterações</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="complemento">
+                        <!-- form start -->
+                        <form role="form">
+                            <div class="card-body row">
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email_colaborador" placeholder="Preencha com o email" value="{% firstof colaborador.Email '' %}">
+                                    <span style="color: red; display: none;" id="spanEmail_colaborador">*Campo email inválido</span>
+                                </div>
+                                <div class="form-group col-md-2 col-sm-12">
+                                    <label>Telefone</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control telefone_mask" name="telefone_colaborador" value="{% firstof colaborador.Telefone '' %}">
+                                        <span style="color: red; display: none;" id="spanTelefone_colaborador">*Campo telefone inválido</span>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-success btn-salvar">Salvar alterações</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+{% endblock %}
+
+{% block scripts %}
+<!-- Script do modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+{% endblock %}

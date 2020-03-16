@@ -13,6 +13,8 @@ urlpatterns = [
 
     path('admin-systemcar/', admin.site.urls),
     path('admin/', views_admin.dashboard, name='dashboard'),
+
+    path('admin/meu_perfil/', views_admin.meu_perfil, name='meu_perfil'),
     
     # URLS DO MENU AVANÇADO
     path('admin/configuracoes/', views_admin.configuracoes, name='configuracoes'),
